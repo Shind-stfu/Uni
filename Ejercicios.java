@@ -1,8 +1,7 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Ejercicios
- {
+public class Ejercicios {
     private static Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
@@ -68,6 +67,8 @@ public class Ejercicios
                     System.out.println("Opción no válida, intenta de nuevo.");
             }
         } while (option != 0);
+
+        scanner.close(); // Mover el close al final de main
     }
 
     // 1. Sumar N números
@@ -288,28 +289,49 @@ public class Ejercicios
     }
 
     // 11. Clasificar elementos negativos, cero y positivos
-    public static void clasificarElementos() {
-        int[] A = new int[10];
-        ArrayList<Integer> negativos = new ArrayList<>();
-        ArrayList<Integer> ceros = new ArrayList<>();
-        ArrayList<Integer> positivos = new ArrayList<>();
+public static void clasificarElementos() {
+    int[] A = new int[10]; // Arreglo original para almacenar números
+    int[] negativos = new int[10]; // Arreglo para almacenar números negativos
+    int[] ceros = new int[10]; // Arreglo para almacenar ceros
+    int[] positivos = new int[10]; // Arreglo para almacenar números positivos
+    
+    // Contadores para los arreglos de clasificación
+    int countNegativos = 0;
+    int countCeros = 0;
+    int countPositivos = 0;
 
-        for (int i = 0; i < 10; i++) {
-            System.out.print("Ingrese el número " + (i + 1) + ": ");
-            A[i] = scanner.nextInt();
-            if (A[i] < 0) {
-                negativos.add(A[i]);
-            } else if (A[i] == 0) {
-                ceros.add(A[i]);
-            } else {
-                positivos.add(A[i]);
-            }
+    // Leer los números y clasificarlos
+    for (int i = 0; i < 10; i++) {
+        System.out.print("Ingrese el número " + (i + 1) + ": ");
+        A[i] = scanner.nextInt();
+        if (A[i] < 0) {
+            negativos[countNegativos++] = A[i]; // Almacena el número y luego incrementa el contador
+        } else if (A[i] == 0) {
+            ceros[countCeros++] = A[i];
+        } else {
+            positivos[countPositivos++] = A[i];
         }
-
-        System.out.println("Negativos: " + negativos);
-        System.out.println("Ceros: " + ceros);
-        System.out.println("Positivos: " + positivos);
     }
+
+    // Imprimir resultados
+    System.out.print("Negativos: ");
+    for (int i = 0; i < countNegativos; i++) {
+        System.out.print(negativos[i] + " ");
+    }
+    System.out.println();
+
+    System.out.print("Ceros: ");
+    for (int i = 0; i < countCeros; i++) {
+        System.out.print(ceros[i] + " ");
+    }
+    System.out.println();
+
+    System.out.print("Positivos: ");
+    for (int i = 0; i < countPositivos; i++) {
+        System.out.print(positivos[i] + " ");
+    }
+    System.out.println();
+}
 
     // 12. Posiciones de un valor dado
     public static void posicionesValorDado() {
@@ -431,10 +453,10 @@ public class Ejercicios
         String profesorMasViejo = nombres[0];
 
         for (int i = 1; i < N; i++) {
-            if (edades[i] < edades[nombres[0].equals(profesorMasJoven) ? 0 : nombres.length - 1]) {
+            if (edades[i] < edades[nombres[0].equals(profesorMasJoven) ? 0 : i]) {
                 profesorMasJoven = nombres[i];
             }
-            if (edades[i] > edades[nombres[0].equals(profesorMasViejo) ? 0 : nombres.length - 1]) {
+            if (edades[i] > edades[nombres[0].equals(profesorMasViejo) ? 0 : i]) {
                 profesorMasViejo = nombres[i];
             }
         }
@@ -456,8 +478,5 @@ public class Ejercicios
         System.out.println("Nombre del profesor con mayor edad: " + profesorMasViejo);
         System.out.println("Número de profesoras con edad mayor al promedio: " + profesorasMayorPromedio);
         System.out.println("Número de profesores con edad menor al promedio: " + profesoresMenorPromedio);
-    }
-}
-        scanner.close();
     }
 }
