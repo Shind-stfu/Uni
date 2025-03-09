@@ -65,3 +65,21 @@ public class Parqueadero {
         System.out.println("Moto no encontrada.");
     }
 }
+// Clase Moto con atributos básicos
+class Moto {
+    private String placa;
+    private long horaIngreso;
+
+    public Moto(String placa, long horaIngreso) {
+        this.placa = placa;
+        this.horaIngreso = horaIngreso;
+    }
+
+    public String getPlaca() {
+        return placa;
+    }
+
+    public long getHoraIngreso() {
+        return horaIngreso;
+    }
+}
