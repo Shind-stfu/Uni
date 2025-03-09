@@ -38,3 +38,30 @@ public class Parqueadero {
                 return;
             }
         }
+         // Buscar un espacio libre
+         for (int i = 0; i < PLAZAS; i++) {
+            if (puestos[i] == null) {
+                puestos[i] = new Moto(placa, System.currentTimeMillis());
+                System.out.println("Moto registrada en el puesto " + (i + 1));
+                return;
+            }
+        }
+        System.out.println("No hay puestos disponibles.");
+    }
+
+    private static void cobrarTarifa() {
+        System.out.print("Ingrese placa: ");
+        String placa = sc.nextLine();
+        
+        for (int i = 0; i < PLAZAS; i++) {
+            if (puestos[i] != null && puestos[i].getPlaca().equals(placa)) {
+                long tiempo = (System.currentTimeMillis() - puestos[i].getHoraIngreso()) / 60000;
+                int tarifa = (tiempo <= 30) ? 0 : (tiempo <= 60) ? 800 : 2000;
+                System.out.println("Tiempo: " + tiempo + " min. Total: $" + tarifa);
+                puestos[i] = null; // Liberar puesto
+                return;
+            }
+        }
+        System.out.println("Moto no encontrada.");
+    }
+}
