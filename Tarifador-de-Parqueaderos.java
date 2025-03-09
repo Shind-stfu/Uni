@@ -15,3 +15,26 @@ public class Parqueadero {
             System.out.print("Seleccione una opción: ");
             opcion = sc.nextInt();
             sc.nextLine(); // Limpiar buffer
+            if (opcion == 1) {
+                registrarMoto();
+            } else if (opcion == 2) {
+                cobrarTarifa();
+            } else if (opcion == 3) {
+                System.out.println("Saliendo...");
+            } else {
+                System.out.println("Opción inválida");
+            }
+        } while (opcion != 3);
+    }
+
+    private static void registrarMoto() {
+        System.out.print("Ingrese placa: ");
+        String placa = sc.nextLine();
+        
+        // Validar si la moto ya está registrada
+        for (Moto moto : puestos) {
+            if (moto != null && moto.getPlaca().equals(placa)) {
+                System.out.println("Esa moto ya está registrada.");
+                return;
+            }
+        }
