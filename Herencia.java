@@ -1,5 +1,5 @@
-// Cambiamos el nombre de la clase pública a herencia
-public class herencia {
+// Cambiamos el nombre de la clase pública a Herencia
+public class Herencia {
     // Atributos para almacenar los totales de precios y los totales específicos de bodega y cabina
     private double totalPrecios;
     private double totalBodega;
@@ -7,7 +7,7 @@ public class herencia {
     private Equipaje[] equipaje; // Arreglo de objetos Equipaje
 
     // Constructor que recibe un arreglo de equipajes
-    public herencia(Equipaje[] equipaje) {
+    public Herencia(Equipaje[] equipaje) {
         this.equipaje = equipaje; // Inicializa el arreglo de equipajes
     }
 
@@ -45,24 +45,21 @@ public class herencia {
             new Cabina(800.0, 3.0)
         };
 
-        herencia precioTotal = new herencia(equipajes); // Creación de la instancia de la clase
+        Herencia precioTotal = new Herencia(equipajes); // Creación de la instancia de la clase
         precioTotal.mostrarTotales(); // Llamada al método para mostrar totales
     }
 }
 
 // Clase base para el equipaje
-class Equipaje {
-    // Constantes que representan valores predeterminados de peso, tamaño y precio base
+abstract class Equipaje {
     protected static final double PESO = 10.0;
     protected static final double TAMANO = 4.5;
     protected static final double PRECIO_BASE = 1000.0;
 
-    // Atributos que describen las características del equipaje
     protected double peso;
     protected double tamano;
     protected double precioBase;
 
-    // Constructores para inicializar el equipaje
     public Equipaje() {
         this(PESO, TAMANO, PRECIO_BASE); // Constructor por defecto
     }
@@ -76,23 +73,19 @@ class Equipaje {
     }
 
     public Equipaje(double peso, double tamano, double precioBase) {
-        this.peso = peso; // Inicializa peso
-        this.tamano = tamano; // Inicializa tamaño
-        this.precioBase = precioBase; // Inicializa precio base
+        this.peso = peso;
+        this.tamano = tamano;
+        this.precioBase = precioBase;
     }
 
-    // Método que debe ser implementado en las subclases para calcular el precio
-    public double calcularPrecio() {
-        return 0.0; // Precio por defecto para la clase base
-    }
+    // Método abstracto que debe ser implementado en las subclases para calcular el precio
+    public abstract double calcularPrecio();
 }
 
-// Clase para el equipaje de bodega, que extiende de Equipaje
+// Clase para el equipaje de bodega
 class Bodega extends Equipaje {
-    // Constante que representa la capacidad de cálculo
     private static final double CAPACIDAD = 8.0;
 
-    // Constructores
     public Bodega() {
         super(); // Llama al constructor por defecto de Equipaje
     }
@@ -105,19 +98,16 @@ class Bodega extends Equipaje {
         super(peso, tamano); // Llama al constructor de Equipaje con peso y tamaño
     }
 
-    // Método que calcula el precio del equipaje de bodega
     @Override
     public double calcularPrecio() {
         return precioBase + (peso * tamano * CAPACIDAD); // Cálculo del precio para Bodega
     }
 }
 
-// Clase para el equipaje de cabina, que también extiende de Equipaje
+// Clase para el equipaje de cabina
 class Cabina extends Equipaje {
-    // Constante que representa el tiempo para el cálculo
     private static final int TIEMPO = 2;
 
-    // Constructores
     public Cabina() {
         super(); // Llama al constructor por defecto de Equipaje
     }
@@ -130,7 +120,6 @@ class Cabina extends Equipaje {
         super(peso, tamano); // Llama al constructor de Equipaje con peso y tamaño
     }
 
-    // Método que calcula el precio del equipaje de cabina
     @Override
     public double calcularPrecio() {
         return precioBase + (peso * tamano * TIEMPO); // Cálculo del precio para Cabina
