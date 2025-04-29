@@ -1,5 +1,3 @@
-package Banco;
-
 public class EjecutarBanco {
     public static void main(String[] args) {
         
@@ -10,5 +8,9 @@ public class EjecutarBanco {
         System.out.println(objCuenta);
 
         System.out.println(objCliente);
+
+        Banco objBanco = new Banco(id:1, nombre: "Mi primer Ahorro", objCuenta);
+
+        
     }
 }

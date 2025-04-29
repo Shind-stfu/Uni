@@ -1,4 +1,3 @@
-package Banco;
 public class Banco {
     private int id;
     private String nombre;
