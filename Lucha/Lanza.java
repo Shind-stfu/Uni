@@ -1,12 +1,6 @@
-
-// Lanza: arma cuerpo a cuerpo
+// Esta es una subclase de Arma que representa una lanza.
 public class Lanza extends Arma {
     public Lanza() {
-        super("Lanza");
-    }
-
-    @Override
-    public String getTipo() {
-        return "Cuerpo a cuerpo";
+        super("Lanza", 30);
     }
 }

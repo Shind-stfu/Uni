@@ -1,5 +1,5 @@
 public class Jax extends Personaje {
     public Jax() {
-        super("Jax", 125, 1.05);
+        super("Jax", 95, new Cadena());
     }
 }

@@ -1,5 +1,6 @@
+// Clase Scorpion, hereda de Personaje.
 public class Scorpion extends Personaje {
     public Scorpion() {
-        super("Scorpion", 120, 1.2); // Vida alta, daño alto
+        super("Scorpion", 100, new Cadena());
     }
 }

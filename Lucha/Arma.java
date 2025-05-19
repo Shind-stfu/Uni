@@ -1,6 +1,5 @@
-import java.util.Random;
-
-public abstract class Arma {
+// Esta clase representa un arma con nombre y daño base.
+public class Arma {
     protected String nombre;
     protected int danoBase;
 
@@ -9,9 +8,9 @@ public abstract class Arma {
         this.danoBase = danoBase;
     }
 
+    // Calcula el daño total (5% más del daño base)
     public int calcularDano() {
-        Random rand = new Random();
-        return (int) ((rand.nextInt(11) + danoBase) * 1.05); // aumento del 5%
+        return (int)(danoBase * 1.05);
     }
 
     public String getNombre() {

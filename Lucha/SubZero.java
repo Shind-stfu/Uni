@@ -1,5 +1,5 @@
 public class SubZero extends Personaje {
     public SubZero() {
-        super("Sub-Zero", 110, 1.1);
+        super("Sub-Zero", 90, new Lanza());
     }
 }

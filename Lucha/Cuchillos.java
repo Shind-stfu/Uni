@@ -1,11 +1,6 @@
-// Cuchillos: arma cuerpo a cuerpo
+// Esta es una subclase de Arma que representa cuchillos.
 public class Cuchillos extends Arma {
     public Cuchillos() {
-        super("Cuchillos");
-    }
-
-    @Override
-    public String getTipo() {
-        return "Cuerpo a cuerpo";
+        super("Cuchillos", 20);
     }
 }
