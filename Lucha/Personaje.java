@@ -1,37 +1,37 @@
+// Clase base para todos los personajes.
 public abstract class Personaje {
     protected String nombre;
-    protected int puntosDeVida;
-    protected double multiplicadorDano;
+    protected int vida;
+    protected Arma arma;
 
-    public Personaje(String nombre, int vida, double multiplicadorDano) {
+    public Personaje(String nombre, int vida, Arma arma) {
         this.nombre = nombre;
-        this.puntosDeVida = vida;
-        this.multiplicadorDano = multiplicadorDano;
+        this.vida = vida;
+        this.arma = arma;
     }
 
+    // Ataca a otro personaje con el arma asignada.
     public void atacar(Personaje oponente) {
-        int danoBase = (int)(Math.random() * 21) + 10; // daño entre 10 y 30
-        int danoFinal = (int)(danoBase * multiplicadorDano);
-        oponente.recibirDano(danoFinal);
-        System.out.println(this.nombre + " ataca a " + oponente.getNombre() + " causando " + danoFinal + " puntos de daño.");
+        int dano = arma.calcularDano();
+        oponente.recibirDano(dano);
+        System.out.println(nombre + " ataca con " + arma.getNombre() + " y causa " + dano + " puntos de daño a " + oponente.getNombre());
     }
 
+    // Recibe daño y reduce la vida.
     public void recibirDano(int dano) {
-        this.puntosDeVida -= dano;
-        if (this.puntosDeVida < 0) {
-            this.puntosDeVida = 0;
-        }
+        vida -= dano;
+        if (vida < 0) vida = 0;
     }
 
     public boolean estaVivo() {
-        return this.puntosDeVida > 0;
+        return vida > 0;
     }
 
     public String getNombre() {
-        return this.nombre;
+        return nombre;
     }
 
-    public int getPuntosDeVida() {
-        return this.puntosDeVida;
+    public int getVida() {
+        return vida;
     }
 }

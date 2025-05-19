@@ -1,26 +1,20 @@
-// Clase base Arma
+import java.util.Random;
+
 public abstract class Arma {
     protected String nombre;
-    protected double multiplicadorDanio;
+    protected int danoBase;
 
-    public Arma(String nombre) {
+    public Arma(String nombre, int danoBase) {
         this.nombre = nombre;
-        this.multiplicadorDanio = 1.05; // Aumenta el daño un 5%
+        this.danoBase = danoBase;
+    }
+
+    public int calcularDano() {
+        Random rand = new Random();
+        return (int) ((rand.nextInt(11) + danoBase) * 1.05); // aumento del 5%
     }
 
     public String getNombre() {
         return nombre;
     }
-
-    // Este método retorna cuánto se multiplica el daño base
-    public double obtenerMultiplicadorDanio() {
-        return multiplicadorDanio;
-    }
-
-    // Método abstracto para mostrar tipo de arma
-    public abstract String getTipo();
 }
-
-
-
-

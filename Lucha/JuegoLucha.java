@@ -1,39 +1,51 @@
-// Esta clase controla todo el flujo de la pelea entre dos personajes.
+import java.util.Scanner;
+
+// Esta clase controla la pelea entre dos personajes seleccionados.
 public class JuegoLucha {
-    private Personaje jugador1;
-    private Personaje jugador2;
+    private Personaje luchador1;
+    private Personaje luchador2;
 
-    // Cuando creas una pelea, debes indicar los nombres de los dos jugadores.
-    public JuegoLucha(String nombre1, String nombre2) {
-        this.jugador1 = new Personaje(nombre1);
-        this.jugador2 = new Personaje(nombre2);
-    }
+    public void iniciar() {
+        Scanner scanner = new Scanner(System.in);
+        Personaje[] personajes = {
+            new Scorpion(), new SubZero(), new LiuKang(), new Kitana(), new Raiden(),
+            new Sonya(), new Kano(), new Jax(), new Mileena(), new KungLao()
+        };
 
-    // Este método inicia la pelea y va alternando los turnos hasta que uno pierda.
-    public void iniciarPelea() {
-        System.out.println("¡Que comience la pelea entre " + jugador1.getNombre() + " y " + jugador2.getNombre() + "!");
-        while (jugador1.estaVivo() && jugador2.estaVivo()) {
-            // Turno del primer luchador
-            turno(jugador1, jugador2);
-            // Si ambos siguen vivos, le toca al segundo
-            if (jugador2.estaVivo()) {
-                turno(jugador2, jugador1);
+        System.out.println("Personajes disponibles:");
+        for (int i = 0; i < personajes.length; i++) {
+            System.out.println(i + 1 + ". " + personajes[i].getNombre());
+        }
+
+        System.out.print("Selecciona el número del primer luchador: ");
+        int opcion1 = scanner.nextInt() - 1;
+
+        System.out.print("Selecciona el número del segundo luchador: ");
+        int opcion2 = scanner.nextInt() - 1;
+
+        luchador1 = personajes[opcion1];
+        luchador2 = personajes[opcion2];
+
+        System.out.println("\n¡Comienza la pelea entre " + luchador1.getNombre() + " y " + luchador2.getNombre() + "!");
+
+        while (luchador1.estaVivo() && luchador2.estaVivo()) {
+            turno(luchador1, luchador2);
+            if (luchador2.estaVivo()) {
+                turno(luchador2, luchador1);
             }
         }
 
-        // Anunciamos quién ganó
-        if (jugador1.estaVivo()) {
-            System.out.println(jugador1.getNombre() + " ha ganado la pelea, ¡felicidades!");
+        System.out.println("\nLa pelea ha terminado.");
+        if (luchador1.estaVivo()) {
+            System.out.println(luchador1.getNombre() + " ha ganado.");
         } else {
-            System.out.println(jugador2.getNombre() + " ha ganado la pelea, ¡bien hecho!");
+            System.out.println(luchador2.getNombre() + " ha ganado.");
         }
     }
 
-    // Este método maneja un turno de ataque entre dos personajes.
     private void turno(Personaje atacante, Personaje defensor) {
-        System.out.println("Es el turno de " + atacante.getNombre() + ". " +
-                           defensor.getNombre() + " tiene " + defensor.getPuntosDeVida() + " puntos de vida.");
+        System.out.println("\nTurno de " + atacante.getNombre());
         atacante.atacar(defensor);
-        System.out.println(defensor.getNombre() + " ahora tiene " + defensor.getPuntosDeVida() + " puntos de vida.\n");
+        System.out.println(defensor.getNombre() + " tiene " + defensor.getVida() + " puntos de vida restantes.");
     }
 }
