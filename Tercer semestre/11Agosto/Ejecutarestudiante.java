@@ -1,46 +1,32 @@
-import java.util.Arrays;
+// Clase principal para probar el sistema
+public class Ejecutarestudiante {
+    public static void main(String[] args) {
+        // Creamos algunos estudiantes
+        Estudiante e1 = new Estudiante(1, "Juan", "Pérez", "Ingeniería");
+        Estudiante e2 = new Estudiante(2, "María", "López", "Ciencias");
+        Estudiante e3 = new Estudiante(3, "Carlos", "Gómez", "Ingeniería");
 
-public class EjecutarEstudiante {
-    
-    public static void main(String[] args){
+        // Matriculamos cursos
+        e1.matricularCursos(1, new String[]{"Matemáticas", "Programación"});
+        e2.matricularCursos(2, new String[]{"Química", "Biología"});
+        e3.matricularCursos(3, new String[]{"Programación", "Bases de Datos"});
 
-        //Forma 1
-        //Creación de los objetos
-        Estudiante objEst1 = new Estudiante(909876, "Juanito", "Perez", "Ingeniería");
-        Estudiante objEst2 = new Estudiante(456098, "Anita", "Cano", "Ingeniería");
-        Estudiante objEst3 = new Estudiante(235621, "Mercedes", "De Jesús", "Ingeniería");
+        // Creamos el gestor de estudiantes y agregamos los que ya tenemos
+        GestorEstudiantes gestor = new GestorEstudiantes();
+        gestor.agregarEstudiante(e1);
+        gestor.agregarEstudiante(e2);
+        gestor.agregarEstudiante(e3);
 
-        System.out.println(objEst1);
-        System.out.println(objEst2);
-        System.out.println(objEst3);
+        // Contamos estudiantes por facultad
+        gestor.contarPorFacultad();
 
-        System.out.println("--------------------------");
-        //Crear arreglo de objetos
-        // int[] a = new int[5];
-        Estudiante[] est = new Estudiante[5];
-        
-        est[0] = objEst1;
-        est[1] = objEst2;
-        est[2] = objEst3;
+        // Contamos estudiantes por curso
+        gestor.contarPorCurso();
 
-        //Forma 2
-
-        est[3] = new Estudiante(506070, "Byron", "Beltran", "Psicología");
-        est[4] = new Estudiante(304050, "Antonio", "Buitrago", "Derecho");
-
-        System.out.println(Arrays.toString(est));
-
-        System.out.println("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXx");
-
-        for(Estudiante e: est){
-            System.out.println(e);
-        }
-
-        System.out.println("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXx");
-
-        for(int i = 0; i < est.length; i++){
-            System.out.println(est[i]);
-        }
-
+        //mostrar datos completos de cada estudiante
+        System.out.println("\n--- Lista completa de estudiantes ---");
+        System.out.println(e1);
+        System.out.println(e2);
+        System.out.println(e3);
     }
 }

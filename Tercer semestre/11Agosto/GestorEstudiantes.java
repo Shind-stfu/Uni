@@ -31,3 +31,21 @@ public class GestorEstudiantes {
             System.out.println(facultad + ": " + conteo.get(facultad));
         }
     }
+     // Método que cuenta cuántos estudiantes hay en cada curso
+    public void contarPorCurso() {
+        HashMap<String, Integer> conteo = new HashMap<>();
+
+        // Recorremos cada estudiante y sus cursos
+        for (Estudiante e : estudiantes) {
+            for (String curso : e.getCursos()) {
+                conteo.put(curso, conteo.getOrDefault(curso, 0) + 1);
+            }
+        }
+
+        // Mostramos el resultado
+        System.out.println("Cantidad de estudiantes por curso:");
+        for (String curso : conteo.keySet()) {
+            System.out.println(curso + ": " + conteo.get(curso));
+        }
+    }
+}
