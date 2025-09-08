@@ -4,7 +4,7 @@ import java.util.Scanner;
 public class App {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        SistemaLockers sistema = new SistemaLockers(3, 3); // 3x3 = 9 casilleros
+        Lockers sistema = new Lockers(3, 3); // 3x3 = 9 casilleros
 
         int opcion;
         do {
@@ -32,9 +32,9 @@ public class App {
                     Casillero asignado = sistema.asignarPaquete(p);
 
                     if (asignado != null) {
-                        System.out.println("✔ Paquete asignado en casillero " + asignado.getId());
+                        System.out.println(" Paquete asignado en casillero " + asignado.getId());
                     } else {
-                        System.out.println("⚠ No hay casilleros disponibles para ese paquete.");
+                        System.out.println(" No hay casilleros disponibles para ese paquete.");
                     }
                     break;
 
@@ -42,9 +42,9 @@ public class App {
                     System.out.print("ID del casillero a liberar: ");
                     int id = sc.nextInt();
                     if (sistema.liberarCasillero(id)) {
-                        System.out.println("✔ Casillero liberado con éxito.");
+                        System.out.println(" Casillero liberado con éxito.");
                     } else {
-                        System.out.println("⚠ El casillero no existe o ya estaba libre.");
+                        System.out.println(" El casillero no existe o ya estaba libre.");
                     }
                     break;
 
@@ -57,7 +57,7 @@ public class App {
                     break;
 
                 default:
-                    System.out.println("⚠ Opción inválida.");
+                    System.out.println(" Opción inválida.");
             }
 
         } while (opcion != 0);

@@ -2,7 +2,7 @@
 public class Lockers {
     private Casillero[][] matriz;
 
-    public SistemaLockers(int filas, int columnas) {
+    public Lockers(int filas, int columnas) {
         matriz = new Casillero[filas][columnas];
         inicializarCasilleros();
     }
