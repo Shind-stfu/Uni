@@ -1,4 +1,4 @@
-import java.util.*;  // Importamos util para usar estructuras de datos como Stack, Queue, LinkedList, etc.
+import java.util.*;
 
 public class TallerEstructuraDatos {
 
