@@ -100,7 +100,7 @@ public class TallerEstructuraDatos {
         sc.close(); // Cerramos el Scanner al terminar
     }
 
-    // ---------------- FUNCIONES ----------------
+    // FUNCIONES 
 
     // Punto 1: Diferencia entre votos positivos y negativos usando una COLA
     public static int getVoteCount(int upvotes, int downvotes) {
