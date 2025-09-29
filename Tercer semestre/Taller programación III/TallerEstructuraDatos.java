@@ -88,11 +88,11 @@ public class TallerEstructuraDatos {
                     break;
 
                 case 9:
-                    System.out.println("\nSaliendo del programa... 👋");
+                    System.out.println("\nSaliendo del programa...");
                     break;
 
                 default:
-                    System.out.println("⚠ Opción no válida, intenta de nuevo.");
+                    System.out.println(" Opción no válida, intenta de nuevo.");
             }
 
         } while (opcion != 9); // El menú se repite hasta que se elija 9
