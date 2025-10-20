@@ -167,7 +167,7 @@ public class TallerEstructuraDatos {
         sb.append("-");
         for (int i = 0; i < 4; i++) sb.append(cola.poll()); // Los últimos 4
 
-        return sb.toString(); // Devolvemos el número en formato (XXX) XXX-XXXX
+        return sb.toString(); // Devolvemos el número en formato XXX XXX-XXXX
     }
 
     // Punto 5: Encontrar el segundo número más grande usando una PILA
