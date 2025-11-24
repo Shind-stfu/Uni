@@ -1,26 +1,31 @@
 import java.util.Scanner;
 
-/**
- * Clase Principal - SistemaBancario
- * Contiene el menú principal y la lógica de interacción con el usuario.
- * Punto de entrada de la aplicación.
- */
-public class SistemaBancario {
+//Clase Principal - SistemaBancario
+//Contiene el flujo general del programa y el menú principal.
+ 
+public class SistemaBancario{
+    
+    // Objeto Banco que administra toda la información de las cuentas
     private static Banco banco = new Banco();
+    
+    // Scanner para capturar datos desde consola
     private static Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
-        // Intentar cargar datos previos
+
+        // Cargar datos almacenados previamente en archivo (si existen)
         if (banco.cargarDesdeArchivo()) {
             System.out.println("✓ Datos cargados correctamente.");
         }
 
-        boolean salir = false;
+        boolean salir = false; // Controla la salida del menú
         
+        // Bucle principal del menú
         while (!salir) {
-            mostrarMenu();
-            int opcion = leerEntero("Seleccione una opción: ");
+            mostrarMenu(); // Mostrar opciones
+            int opcion = leerEntero("Seleccione una opción: "); // Leer opción
             
+            // Procesar opción seleccionada
             switch (opcion) {
                 case 1:
                     crearCuenta();
@@ -57,16 +62,17 @@ public class SistemaBancario {
                     System.out.println("❌ Opción no válida.");
             }
             
+            // Pausar antes de volver al menú
             if (!salir) {
                 System.out.println("\nPresione Enter para continuar...");
                 scanner.nextLine();
             }
         }
         
-        scanner.close();
+        scanner.close(); // Cerrar el lector
     }
 
-    // Mostrar menú principal
+    // Mostrar menú principal al usuario
     private static void mostrarMenu() {
         limpiarPantalla();
         System.out.println("╔════════════════════════════════════════╗");
@@ -85,17 +91,20 @@ public class SistemaBancario {
         System.out.println("─────────────────────────────────────────");
     }
 
-    // Crear una nueva cuenta
+    // Crear una nueva cuenta bancaria
     private static void crearCuenta() {
         System.out.println("\n=== CREAR NUEVA CUENTA ===");
+
         System.out.print("Número de cuenta: ");
         String numero = scanner.nextLine();
         
         System.out.print("Nombre del titular: ");
         String titular = scanner.nextLine();
         
+        // Leer saldo inicial validado
         double saldoInicial = leerDouble("Saldo inicial: $");
         
+        // Intentar crear la cuenta
         if (banco.crearCuenta(numero, titular, saldoInicial)) {
             System.out.println("✓ Cuenta creada exitosamente.");
         } else {
@@ -103,13 +112,14 @@ public class SistemaBancario {
         }
     }
 
-    // Consultar saldo de una cuenta
+    // Consultar el saldo de una cuenta existente
     private static void consultarSaldo() {
         System.out.println("\n=== CONSULTAR SALDO ===");
         System.out.print("Número de cuenta: ");
         String numero = scanner.nextLine();
         
         Double saldo = banco.consultarSaldo(numero);
+        
         if (saldo != null) {
             System.out.printf("Saldo actual: $%.2f\n", saldo);
         } else {
@@ -117,7 +127,7 @@ public class SistemaBancario {
         }
     }
 
-    // Depositar dinero
+    // Realizar un depósito en una cuenta
     private static void depositar() {
         System.out.println("\n=== DEPOSITAR ===");
         System.out.print("Número de cuenta: ");
@@ -134,7 +144,7 @@ public class SistemaBancario {
         }
     }
 
-    // Retirar dinero
+    // Retirar dinero de una cuenta
     private static void retirar() {
         System.out.println("\n=== RETIRAR ===");
         System.out.print("Número de cuenta: ");
@@ -151,9 +161,10 @@ public class SistemaBancario {
         }
     }
 
-    // Transferir entre cuentas
+    // Transferir dinero entre dos cuentas
     private static void transferir() {
         System.out.println("\n=== TRANSFERIR ===");
+
         System.out.print("Cuenta origen: ");
         String origen = scanner.nextLine();
         
@@ -169,11 +180,14 @@ public class SistemaBancario {
         }
     }
 
-    // Ordenar cuentas por saldo
+    // Ordenar las cuentas por saldo usando distintos algoritmos
     private static void ordenarCuentas() {
         System.out.println("\n=== ORDENAR CUENTAS ===");
         System.out.println("1. Merge Sort");
-        System.out.println("2. Quick Sort");
+        System.out.println("2. Quick Sort");// Mostrar opciones de algoritmos de ordenamiento.
+                                            // Merge Sort y Quick Sort son dos formas distintas de ordenar las cuentas por saldo.
+                                            // Los muestro aquí para que el usuario elija cuál quiere usar.
+
         int opcion = leerEntero("Seleccione algoritmo: ");
         
         if (opcion == 1) {
@@ -187,10 +201,10 @@ public class SistemaBancario {
             return;
         }
         
-        banco.mostrarCuentas();
+        banco.mostrarCuentas(); // Mostrar resultado del ordenamiento
     }
 
-    // Buscar cuenta por saldo usando búsqueda binaria
+    // Buscar una cuenta por saldo mediante búsqueda binaria
     private static void buscarPorSaldo() {
         System.out.println("\n=== BÚSQUEDA BINARIA POR SALDO ===");
         System.out.println("⚠ La lista debe estar ordenada primero.");
@@ -198,6 +212,7 @@ public class SistemaBancario {
         double saldo = leerDouble("Ingrese el saldo a buscar: $");
         
         Cuenta encontrada = banco.busquedaBinariaPorSaldo(saldo);
+        
         if (encontrada != null) {
             System.out.println("✓ Cuenta encontrada:");
             System.out.println(encontrada);
@@ -206,7 +221,7 @@ public class SistemaBancario {
         }
     }
 
-    // Guardar datos en archivo
+    // Guardar todas las cuentas en archivo
     private static void guardarDatos() {
         if (banco.guardarEnArchivo()) {
             System.out.println("✓ Datos guardados exitosamente.");
@@ -215,24 +230,29 @@ public class SistemaBancario {
         }
     }
 
-    // Métodos auxiliares para lectura de datos
+    // Leer enteros con validación
     private static int leerEntero(String mensaje) {
         System.out.print(mensaje);
+        
         while (!scanner.hasNextInt()) {
             System.out.print("❌ Ingrese un número válido: ");
             scanner.next();
         }
+        
         int valor = scanner.nextInt();
         scanner.nextLine(); // Limpiar buffer
         return valor;
     }
 
+    // Leer números decimales con validación
     private static double leerDouble(String mensaje) {
         System.out.print(mensaje);
+        
         while (!scanner.hasNextDouble()) {
             System.out.print("❌ Ingrese un número válido: ");
             scanner.next();
         }
+        
         double valor = scanner.nextDouble();
         scanner.nextLine(); // Limpiar buffer
         return valor;
@@ -240,6 +260,7 @@ public class SistemaBancario {
 
     // Simulación de limpieza de pantalla
     private static void limpiarPantalla() {
+        // Se imprimen líneas vacías para simular una "pantalla limpia"
         for (int i = 0; i < 50; i++) {
             System.out.println();
         }
